@@ -1,0 +1,8 @@
+django
+djangorestframework
+djangorestframework-simplejwt
+drf-spectacular
+psycopg[binary]
+redis
+celery
+firebase-admin

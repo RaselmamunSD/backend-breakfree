@@ -1,0 +1,243 @@
+{
+  "info": {
+    "name": "Break Free API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/register/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"rasel\",\n  \"email\": \"rasel@example.com\",\n  \"full_name\": \"Rasel Mamun\",\n  \"phone\": \"01700000000\",\n  \"password\": \"12345678\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Auth - Signup Send OTP",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/signup/send-otp/",
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"rasel@example.com\"\n}" }
+      }
+    },
+    {
+      "name": "Auth - Signup Verify OTP",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/signup/verify-otp/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"rasel@example.com\",\n  \"otp\": \"12345\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Auth - Signup Complete",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/signup/complete/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"rasel\",\n  \"email\": \"rasel@example.com\",\n  \"full_name\": \"Rasel Mamun\",\n  \"phone\": \"01700000000\",\n  \"password\": \"12345678\",\n  \"otp\": \"12345\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/login/",
+        "body": { "mode": "raw", "raw": "{\n  \"username\": \"rasel\",\n  \"password\": \"12345678\"\n}" }
+      }
+    },
+    {
+      "name": "Auth - Firebase Login (Google/Apple)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/firebase-login/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id_token\": \"FIREBASE_ID_TOKEN_HERE\",\n  \"provider\": \"google.com\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Auth - Me",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/auth/me/"
+      }
+    },
+    {
+      "name": "Auth - Forgot Password Send OTP",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/forgot-password/send-otp/",
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"rasel@example.com\"\n}" }
+      }
+    },
+    {
+      "name": "Auth - Forgot Password Verify OTP",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/forgot-password/verify-otp/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"rasel@example.com\",\n  \"otp\": \"12345\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Auth - Forgot Password Reset",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{base_url}}/api/auth/forgot-password/reset/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"rasel@example.com\",\n  \"otp\": \"12345\",\n  \"new_password\": \"newpass123\",\n  \"confirm_password\": \"newpass123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Onboarding - Status",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/onboarding/status/"
+      }
+    },
+    {
+      "name": "Onboarding - Safety agree",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": "{{base_url}}/api/onboarding/safety/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"agreed\": true,\n  \"content_version\": \"1.0\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Onboarding - List tiers",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/onboarding/subscription-tiers/"
+      }
+    },
+    {
+      "name": "Onboarding - Select tier",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": "{{base_url}}/api/onboarding/subscription-tier/",
+        "body": { "mode": "raw", "raw": "{\n  \"tier_slug\": \"quiet-peaks\"\n}" }
+      }
+    },
+    {
+      "name": "Onboarding - List programs",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/onboarding/programs/"
+      }
+    },
+    {
+      "name": "Onboarding - Select program",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": "{{base_url}}/api/onboarding/program/",
+        "body": { "mode": "raw", "raw": "{\n  \"program_slug\": \"foundation\"\n}" }
+      }
+    },
+    {
+      "name": "Mood - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": "{{base_url}}/api/moods/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"mood_score\": 8,\n  \"note\": \"Feeling calm\",\n  \"entry_date\": \"2026-04-22\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Journal - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/journals/"
+      }
+    },
+    {
+      "name": "Subscription Plans - List",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/subscription-plans/"
+      }
+    },
+    {
+      "name": "My Subscription - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": "{{base_url}}/api/my-subscriptions/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"plan\": 1,\n  \"status\": \"active\",\n  \"start_date\": \"2026-04-22\",\n  \"end_date\": \"2026-05-22\",\n  \"auto_renew\": true\n}"
+        }
+      }
+    },
+    {
+      "name": "Profile Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/profile/dashboard/"
+      }
+    },
+    {
+      "name": "Preference - Get",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/preferences/"
+      }
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000" },
+    { "key": "access_token", "value": "" }
+  ]
+}
