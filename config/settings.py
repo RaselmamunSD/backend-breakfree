@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "authentication",
     "wellness",
     "onboarding",
+    "notifications",
 ]
 
 MIDDLEWARE = [
