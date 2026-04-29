@@ -234,6 +234,61 @@
         "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
         "url": "{{base_url}}/api/preferences/"
       }
+    },
+    {
+      "name": "Notifications - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/notifications/"
+      }
+    },
+    {
+      "name": "Notifications - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": "{{base_url}}/api/notifications/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Daily Check-in\",\n  \"message\": \"How are you feeling today?\",\n  \"notification_type\": \"info\",\n  \"action_url\": \"https://example.com/check-in\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Notifications - Unread Count",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/notifications/unread_count/"
+      }
+    },
+    {
+      "name": "Notifications - Mark All As Read",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/notifications/mark_all_as_read/"
+      }
+    },
+    {
+      "name": "Notifications - Mark As Read",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/notifications/1/mark_as_read/"
+      }
+    },
+    {
+      "name": "Notifications - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "url": "{{base_url}}/api/notifications/1/"
+      }
     }
   ],
   "variable": [
