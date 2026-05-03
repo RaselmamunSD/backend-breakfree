@@ -1,6 +1,7 @@
 {
   "info": {
     "name": "Break Free API",
+    "description": "Set `wellness_plan_id` and `premium_plan_id` from GET /api/subscription-plans/ and GET /api/premium/plans/ (first item id), or use scripts/run_postman_collection.py. Restore Purchase returns 503 unless DEBUG or RESTORE_PURCHASE_TRUST_RECEIPT=true. OTP/Firebase need real credentials.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -8,7 +9,12 @@
       "name": "Auth - Register",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/register/",
         "body": {
           "mode": "raw",
@@ -20,16 +26,29 @@
       "name": "Auth - Signup Send OTP",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/signup/send-otp/",
-        "body": { "mode": "raw", "raw": "{\n  \"email\": \"rasel@example.com\"\n}" }
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"rasel@example.com\"\n}"
+        }
       }
     },
     {
       "name": "Auth - Signup Verify OTP",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/signup/verify-otp/",
         "body": {
           "mode": "raw",
@@ -41,7 +60,12 @@
       "name": "Auth - Signup Complete",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/signup/complete/",
         "body": {
           "mode": "raw",
@@ -53,16 +77,29 @@
       "name": "Auth - Login",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/login/",
-        "body": { "mode": "raw", "raw": "{\n  \"username\": \"rasel\",\n  \"password\": \"12345678\"\n}" }
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"rasel\",\n  \"password\": \"12345678\"\n}"
+        }
       }
     },
     {
       "name": "Auth - Firebase Login (Google/Apple)",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/firebase-login/",
         "body": {
           "mode": "raw",
@@ -74,7 +111,12 @@
       "name": "Auth - Me",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/auth/me/"
       }
     },
@@ -82,16 +124,29 @@
       "name": "Auth - Forgot Password Send OTP",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/forgot-password/send-otp/",
-        "body": { "mode": "raw", "raw": "{\n  \"email\": \"rasel@example.com\"\n}" }
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"rasel@example.com\"\n}"
+        }
       }
     },
     {
       "name": "Auth - Forgot Password Verify OTP",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/forgot-password/verify-otp/",
         "body": {
           "mode": "raw",
@@ -103,7 +158,12 @@
       "name": "Auth - Forgot Password Reset",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{base_url}}/api/auth/forgot-password/reset/",
         "body": {
           "mode": "raw",
@@ -115,7 +175,12 @@
       "name": "Onboarding - Status",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/onboarding/status/"
       }
     },
@@ -124,8 +189,14 @@
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
         ],
         "url": "{{base_url}}/api/onboarding/safety/",
         "body": {
@@ -138,7 +209,12 @@
       "name": "Onboarding - List tiers",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/onboarding/subscription-tiers/"
       }
     },
@@ -147,18 +223,32 @@
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
         ],
         "url": "{{base_url}}/api/onboarding/subscription-tier/",
-        "body": { "mode": "raw", "raw": "{\n  \"tier_slug\": \"quiet-peaks\"\n}" }
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tier_slug\": \"quiet-peaks\"\n}"
+        }
       }
     },
     {
       "name": "Onboarding - List programs",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/onboarding/programs/"
       }
     },
@@ -167,11 +257,20 @@
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
         ],
         "url": "{{base_url}}/api/onboarding/program/",
-        "body": { "mode": "raw", "raw": "{\n  \"program_slug\": \"foundation\"\n}" }
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"program_slug\": \"foundation\"\n}"
+        }
       }
     },
     {
@@ -179,8 +278,14 @@
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
         ],
         "url": "{{base_url}}/api/moods/",
         "body": {
@@ -193,7 +298,12 @@
       "name": "Journal - List",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/journals/"
       }
     },
@@ -209,13 +319,19 @@
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
         ],
         "url": "{{base_url}}/api/my-subscriptions/",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"plan\": 1,\n  \"status\": \"active\",\n  \"start_date\": \"2026-04-22\",\n  \"end_date\": \"2026-05-22\",\n  \"auto_renew\": true\n}"
+          "raw": "{\n  \"plan\": {{wellness_plan_id}},\n  \"status\": \"active\",\n  \"start_date\": \"2026-04-22\",\n  \"end_date\": \"2026-05-22\",\n  \"auto_renew\": true\n}"
         }
       }
     },
@@ -223,7 +339,12 @@
       "name": "Profile Dashboard",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/profile/dashboard/"
       }
     },
@@ -231,7 +352,12 @@
       "name": "Preference - Get",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/preferences/"
       }
     },
@@ -239,7 +365,12 @@
       "name": "Notifications - List",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/notifications/"
       }
     },
@@ -248,8 +379,14 @@
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
         ],
         "url": "{{base_url}}/api/notifications/",
         "body": {
@@ -262,7 +399,12 @@
       "name": "Notifications - Unread Count",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/notifications/unread_count/"
       }
     },
@@ -270,7 +412,12 @@
       "name": "Notifications - Mark All As Read",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/notifications/mark_all_as_read/"
       }
     },
@@ -278,7 +425,12 @@
       "name": "Notifications - Mark As Read",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/notifications/1/mark_as_read/"
       }
     },
@@ -286,13 +438,596 @@
       "name": "Notifications - Delete",
       "request": {
         "method": "DELETE",
-        "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
         "url": "{{base_url}}/api/notifications/1/"
+      }
+    },
+    {
+      "name": "Features - Dashboard",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/dashboard/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Tutorials List",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/feature-tutorials/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Shortcuts Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/shortcuts/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"Breath\",\"icon_key\":\"wind\",\"target_route\":\"/tools/breathe\",\"sort_order\":1}"
+        }
+      }
+    },
+    {
+      "name": "Features - Current Journey Get",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/current-journey/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Predict Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/predict/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"risk_score\":42,\"confidence_score\":80,\"insight\":\"Evening craving may spike today\",\"recommendation\":\"Use grounding quest at 8 PM\"}"
+        }
+      }
+    },
+    {
+      "name": "Features - Statistics",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/statistics/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Grounding Quest Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/tools/grounding-quests/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\":\"5-4-3-2-1 Calm Reset\",\"grounding_type\":\"5-4-3-2-1\",\"total_steps\":5,\"completed_steps\":3,\"duration_seconds\":180}"
+        }
+      }
+    },
+    {
+      "name": "Features - Forecast Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/forecasts/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"focus_area\":\"Mood\",\"forecast_date\":\"2026-05-05\",\"mood_trend\":\"Stable\",\"stress_trend\":\"Lower\",\"note\":\"Continue breathing sessions\"}"
+        }
+      }
+    },
+    {
+      "name": "Features - Log Mood",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/log-mood/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"mood_score\":7,\"note\":\"Manageable day\",\"entry_date\":\"2026-05-04\"}"
+        }
+      }
+    },
+    {
+      "name": "Features - SOS Activate",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/sos-mode/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"trigger_reason\":\"High urge\",\"safety_plan\":\"Call support contact and start breathing\"}"
+        }
+      }
+    },
+    {
+      "name": "Features - Exposure Ladder Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/exposure-ladders/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\":\"Social anxiety ladder\",\"description\":\"Small to hard exposure tasks\"}"
+        }
+      }
+    },
+    {
+      "name": "Features - Settings Get",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/settings/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Premium Plans",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/premium/plans/"
+      }
+    },
+    {
+      "name": "Features - Premium Subscription Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/premium/subscriptions/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"plan\":{{premium_plan_id}},\"status\":\"active\",\"start_date\":\"2026-05-04\",\"end_date\":\"2026-06-04\"}"
+        }
+      }
+    },
+    {
+      "name": "Features - Journal",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/journal/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Breathe Tool",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/tools/breathe/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"duration_seconds\":120,\"completed\":true,\"notes\":\"Night calm session\"}"
+        }
+      }
+    },
+    {
+      "name": "Wellness - Breathing Exercises List",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/breathing-exercises/"
+      }
+    },
+    {
+      "name": "Features - Fear Forecast Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/fear-forecasts/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\":\"Team Meeting\",\"story_text\":\"I will panic and have to leave.\",\"category\":\"social\",\"belief_strength\":75,\"proof_check_in\":\"tomorrow_morning\",\"likelihood_percent\":60,\"distress_level\":6}"
+        }
+      }
+    },
+    {
+      "name": "Features - Fear Forecast Stats",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/fear-forecasts/stats/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Worry Forecast Templates",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/worry-forecast-templates/"
+      }
+    },
+    {
+      "name": "Features - CBT Tip",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/tips/cbt/"
+      }
+    },
+    {
+      "name": "Features - App Content (all)",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/app-content/"
+      }
+    },
+    {
+      "name": "Features - Profile Section",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/profile/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Settings PATCH me",
+      "request": {
+        "method": "PATCH",
+        "url": "{{base_url}}/api/settings/me/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"theme_mode\":\"dark\",\"analytics_sharing\":\"private\"}"
+        }
+      }
+    },
+    {
+      "name": "Features - Journeys List",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/journeys/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Journey Detail",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/journeys/quick-start-14/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Journey Day",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/journeys/quick-start-14/days/1/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Journey Day Complete",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/journeys/quick-start-14/days/1/complete/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - Exposure Item Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/exposures/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"category\":\"Social\",\"specific_exposure\":\"Say hi to a neighbor\",\"difficulty_level\":4,\"ladder_status\":\"not_scheduled\"}"
+        }
+      }
+    },
+    {
+      "name": "Features - Exposure Items List",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/exposures/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Features - SOS Session Create",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/sos-sessions/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"current_step\":\"select_mode\"}"
+        }
+      }
+    },
+    {
+      "name": "Premium - Entitlements",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/premium/entitlements/",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Premium - Restore Purchase (staging / DEBUG)",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/premium/restore-purchase/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"platform\":\"ios\",\"product_id\":\"com.breakfree.premium.monthly\",\"purchase_token\":\"dev-restore-token-min-8-chars\",\"transaction_id\":\"postman_test_tx_1\"}"
+        }
+      }
+    },
+    {
+      "name": "App Content - Premium paywall (new)",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/app-content/premium_paywall_new/"
+      }
+    },
+    {
+      "name": "Guest - Log Mood (X-Device-Id)",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/guest/log-mood/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Device-Id",
+            "value": "dev-device-1"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"mood_label\":\"okay\",\"note\":\"trying app\"}"
+        }
+      }
+    },
+    {
+      "name": "Guest - Fear Forecast",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/guest/fear-forecasts/",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Device-Id",
+            "value": "dev-device-2"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"story_text\":\"This feeling will not pass.\",\"belief_strength\":80,\"distress_level\":7}"
+        }
       }
     }
   ],
   "variable": [
-    { "key": "base_url", "value": "http://127.0.0.1:8000" },
-    { "key": "access_token", "value": "" }
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    },
+    {
+      "key": "wellness_plan_id",
+      "value": "1"
+    },
+    {
+      "key": "premium_plan_id",
+      "value": "1"
+    }
   ]
 }

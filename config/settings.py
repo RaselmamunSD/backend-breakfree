@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "wellness",
     "onboarding",
     "notifications",
+    "features",
 ]
 
 MIDDLEWARE = [
@@ -148,6 +149,9 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Backend APIs for Break Free Mind App",
     "VERSION": "1.0.0",
 }
+
+# Allow restore-purchase to activate subscriptions without Store API (staging ONLY).
+RESTORE_PURCHASE_TRUST_RECEIPT = os.getenv("RESTORE_PURCHASE_TRUST_RECEIPT", "").lower() in ("1", "true", "yes")
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 CELERY_BROKER_URL = REDIS_URL

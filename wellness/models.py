@@ -11,8 +11,17 @@ class TimeStampedModel(models.Model):
 
 
 class MoodEntry(TimeStampedModel):
+    MOOD_LABEL_CHOICES = (
+        ("terrible", "Terrible"),
+        ("bad", "Bad"),
+        ("okay", "Okay"),
+        ("good", "Good"),
+        ("excellent", "Excellent"),
+    )
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="moods")
     mood_score = models.PositiveSmallIntegerField(help_text="1 to 10")
+    mood_label = models.CharField(max_length=20, choices=MOOD_LABEL_CHOICES, blank=True)
     note = models.TextField(blank=True)
     entry_date = models.DateField()
 
@@ -37,9 +46,38 @@ class JournalEntry(TimeStampedModel):
         return self.title
 
 
+class BreathingExercise(TimeStampedModel):
+    """Catalog of breathwork patterns (Box, 4-7-8, etc.) — timing lives in `phases` JSON."""
+
+    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=120)
+    description = models.CharField(max_length=255, blank=True)
+    duration_minutes = models.PositiveSmallIntegerField(default=4)
+    total_cycles = models.PositiveSmallIntegerField(default=10)
+    difficulty_tag = models.CharField(max_length=40, blank=True, help_text="e.g. BEGINNER, ADVANCED")
+    intensity_level = models.PositiveSmallIntegerField(default=1, help_text="1-4 dots in UI")
+    theme_color = models.CharField(max_length=20, blank=True, help_text="teal, pink, …")
+    phases = models.JSONField(default=list, help_text="List of {phase, seconds} e.g. inhale/hold/exhale")
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
 class BreathingSession(TimeStampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="breathing_sessions")
+    exercise = models.ForeignKey(
+        BreathingExercise,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="sessions",
+    )
     duration_seconds = models.PositiveIntegerField(default=60)
+    cycles_completed = models.PositiveSmallIntegerField(default=0)
     completed = models.BooleanField(default=True)
     notes = models.CharField(max_length=255, blank=True)
 

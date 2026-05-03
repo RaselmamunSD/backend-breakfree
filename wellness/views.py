@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import (
+    BreathingExercise,
     BreathingSession,
     Habit,
     JournalEntry,
@@ -13,6 +14,7 @@ from .models import (
     UserSubscription,
 )
 from .serializers import (
+    BreathingExerciseSerializer,
     BreathingSessionSerializer,
     HabitSerializer,
     JournalEntrySerializer,
@@ -49,6 +51,12 @@ class JournalEntryViewSet(UserOwnedModelViewSet):
 class BreathingSessionViewSet(UserOwnedModelViewSet):
     serializer_class = BreathingSessionSerializer
     queryset = BreathingSession.objects.all()
+
+
+class BreathingExerciseViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = BreathingExerciseSerializer
+    permission_classes = [permissions.AllowAny]
+    queryset = BreathingExercise.objects.filter(is_active=True)
 
 
 class HabitViewSet(UserOwnedModelViewSet):

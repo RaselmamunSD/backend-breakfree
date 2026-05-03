@@ -1,0 +1,51 @@
+from django.contrib import admin
+
+from .models import (
+    AppContent,
+    CBTTip,
+    CurrentJourney,
+    DashboardShortcut,
+    ExposureItem,
+    ExposureLadder,
+    ExposureLadderStep,
+    FearForecast,
+    FeatureTutorial,
+    Forecast,
+    GroundingQuestSession,
+    GuestQuota,
+    Prediction,
+    PremiumPlan,
+    PremiumSubscription,
+    ProgramDay,
+    ProgramTrack,
+    SOSSession,
+    SOSModeEvent,
+    UserDayCompletion,
+    UserProgramProgress,
+    UserSetting,
+    WorryForecastTemplate,
+)
+
+admin.site.register(FeatureTutorial)
+admin.site.register(DashboardShortcut)
+admin.site.register(CurrentJourney)
+admin.site.register(Prediction)
+admin.site.register(Forecast)
+admin.site.register(GroundingQuestSession)
+admin.site.register(SOSModeEvent)
+admin.site.register(SOSSession)
+admin.site.register(ExposureLadder)
+admin.site.register(ExposureLadderStep)
+admin.site.register(ExposureItem)
+admin.site.register(UserSetting)
+admin.site.register(PremiumPlan)
+admin.site.register(PremiumSubscription)
+admin.site.register(GuestQuota)
+admin.site.register(FearForecast)
+admin.site.register(WorryForecastTemplate)
+admin.site.register(ProgramTrack)
+admin.site.register(ProgramDay)
+admin.site.register(UserProgramProgress)
+admin.site.register(UserDayCompletion)
+admin.site.register(CBTTip)
+admin.site.register(AppContent)
