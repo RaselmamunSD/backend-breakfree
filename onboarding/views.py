@@ -32,6 +32,7 @@ class JourneyProgramListView(generics.ListAPIView):
 
 
 class OnboardingStatusView(APIView):
+    serializer_class = UserOnboardingSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
@@ -40,6 +41,7 @@ class OnboardingStatusView(APIView):
 
 
 class OnboardingSafetyView(APIView):
+    serializer_class = UserOnboardingSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -63,6 +65,7 @@ class OnboardingSafetyView(APIView):
 
 
 class OnboardingSelectTierView(APIView):
+    serializer_class = UserOnboardingSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -87,6 +90,7 @@ class OnboardingSelectTierView(APIView):
 
 
 class OnboardingSelectProgramView(APIView):
+    serializer_class = UserOnboardingSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):

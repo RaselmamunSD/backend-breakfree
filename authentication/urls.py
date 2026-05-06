@@ -11,6 +11,7 @@ from .views import (
     SignupCompleteView,
     SignupSendOTPView,
     SignupVerifyOTPView,
+    DebugGetOTPView,
 )
 
 urlpatterns = [
@@ -25,4 +26,5 @@ urlpatterns = [
     path("forgot-password/reset/", ForgotPasswordResetView.as_view(), name="forgot-password-reset"),
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("me/", MeView.as_view(), name="me"),
+    path("debug/get-otp/<str:email>/", DebugGetOTPView.as_view(), name="debug-get-otp"),
 ]

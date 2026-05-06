@@ -11,6 +11,8 @@ from .serializers import NotificationSerializer
 class NotificationViewSet(ModelViewSet):
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'pk'
+    lookup_value_regex = r'\d+'
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

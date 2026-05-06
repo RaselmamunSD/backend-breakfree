@@ -89,6 +89,7 @@ class UserPreferenceViewSet(UserOwnedModelViewSet):
 
 
 class ProfileDashboardView(APIView):
+    serializer_class = UserPreferenceSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):

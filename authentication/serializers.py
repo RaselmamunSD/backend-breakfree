@@ -53,12 +53,19 @@ class VerifyOTPSerializer(serializers.Serializer):
 
 
 class SignupCompleteSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=True)
     password = serializers.CharField(write_only=True, min_length=6)
     otp = serializers.RegexField(regex=r"^\d{5}$", max_length=5, min_length=5, write_only=True)
 
     class Meta:
         model = User
         fields = ("id", "username", "email", "full_name", "phone", "password", "otp")
+        read_only_fields = ("id",)
+        extra_kwargs = {
+            "username": {"required": True},
+            "full_name": {"required": False},
+            "phone": {"required": False},
+        }
 
 
 class ResetPasswordSerializer(serializers.Serializer):

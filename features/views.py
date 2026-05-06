@@ -1,4 +1,5 @@
 from datetime import timedelta
+import logging
 
 from django.conf import settings
 from django.db.models import Q
@@ -8,8 +9,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+logger = logging.getLogger(__name__)
+
 from wellness.models import BreathingExercise, BreathingSession, JournalEntry, MoodEntry, UserPreference
-from wellness.serializers import UserPreferenceSerializer
+from wellness.serializers import UserPreferenceSerializer, BreathingSessionSerializer
+from authentication.serializers import UserSerializer
 
 from .models import (
     AppContent,
@@ -252,6 +256,7 @@ class PremiumSubscriptionViewSet(UserOwnedModelViewSet):
 
 
 class PremiumEntitlementsView(APIView):
+    serializer_class = PremiumSubscriptionSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
@@ -275,6 +280,7 @@ class PremiumEntitlementsView(APIView):
 
 
 class PremiumRestorePurchaseView(APIView):
+    serializer_class = RestorePurchaseSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -392,6 +398,7 @@ class WorryForecastTemplateViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class CBTTipRandomView(APIView):
+    serializer_class = CBTTipSerializer
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
@@ -409,6 +416,7 @@ class CBTTipRandomView(APIView):
 
 
 class AppContentView(APIView):
+    serializer_class = AppContentSerializer
     permission_classes = [permissions.AllowAny]
 
     def get(self, request, key=None):
@@ -422,6 +430,7 @@ class AppContentView(APIView):
 
 
 class JourneyListView(APIView):
+    serializer_class = ProgramTrackSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
@@ -430,6 +439,7 @@ class JourneyListView(APIView):
 
 
 class JourneyDetailView(APIView):
+    serializer_class = ProgramTrackSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, slug):
@@ -468,6 +478,7 @@ class JourneyDetailView(APIView):
 
 
 class JourneyDayDetailView(APIView):
+    serializer_class = ProgramDaySerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, slug, day_number):
@@ -492,6 +503,7 @@ class JourneyDayDetailView(APIView):
 
 
 class JourneyDayCompleteView(APIView):
+    serializer_class = UserProgramProgressSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, slug, day_number):
@@ -512,6 +524,7 @@ class JourneyDayCompleteView(APIView):
 
 
 class GuestMoodLogView(APIView):
+    serializer_class = MoodLogSerializer
     permission_classes = [permissions.AllowAny]
     authentication_classes = []
 
@@ -539,6 +552,7 @@ class GuestMoodLogView(APIView):
 
 
 class GuestFearForecastCreateView(APIView):
+    serializer_class = FearForecastSerializer
     permission_classes = [permissions.AllowAny]
     authentication_classes = []
 
@@ -563,6 +577,7 @@ class GuestFearForecastCreateView(APIView):
 
 
 class ProfileSectionView(APIView):
+    serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
@@ -584,15 +599,24 @@ class ProfileSectionView(APIView):
 
 
 class ProfileDeleteAccountView(APIView):
+    serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
-        user = request.user
-        user.delete()
-        return Response({"detail": "Account deleted."}, status=status.HTTP_200_OK)
+        try:
+            user = request.user
+            user_id = user.id
+            user_email = user.email
+            user.delete()
+            logger.info(f"User deleted: {user_email} (ID: {user_id})")
+            return Response({"detail": "Account deleted."}, status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.error(f"Error deleting user {request.user.email}: {str(e)}")
+            return Response({"detail": f"Error deleting account: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class DashboardOverviewView(APIView):
+    serializer_class = CurrentJourneySerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
@@ -617,6 +641,7 @@ class DashboardOverviewView(APIView):
 
 
 class StatisticsView(APIView):
+    serializer_class = UserSettingSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
@@ -696,6 +721,7 @@ class StatisticsView(APIView):
 
 
 class MoodLogView(APIView):
+    serializer_class = MoodLogSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -723,6 +749,7 @@ class MoodLogView(APIView):
 
 
 class JournalView(APIView):
+    serializer_class = JournalLiteSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
@@ -731,6 +758,7 @@ class JournalView(APIView):
 
 
 class BreatheToolView(APIView):
+    serializer_class = BreathingSessionSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
