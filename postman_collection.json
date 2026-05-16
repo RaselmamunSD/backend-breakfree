@@ -20,7 +20,39 @@
           "mode": "raw",
           "raw": "{\n  \"username\": \"rasel\",\n  \"email\": \"rasel@example.com\",\n  \"full_name\": \"Rasel Mamun\",\n  \"phone\": \"01700000000\",\n  \"password\": \"12345678\"\n}"
         }
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is successful 200/201/204\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202, 204]);",
+              "});",
+              "",
+              "if (pm.response.code === 200 || pm.response.code === 201) {",
+              "    var jsonData = pm.response.json();",
+              "    if (jsonData.access) {",
+              "        pm.collectionVariables.set(\"access_token\", jsonData.access);",
+              "    } else if (jsonData.token) {",
+              "        pm.collectionVariables.set(\"access_token\", jsonData.token);",
+              "    }",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"test_username\", \"user_\" + pm.variables.replaceIn(\"{{}}\"));",
+              "pm.collectionVariables.set(\"test_email\", \"email_\" + pm.variables.replaceIn(\"{{}}\") + \"@example.com\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
     },
     {
       "name": "Auth - Signup Send OTP",
@@ -1010,6 +1042,210 @@
           "raw": "{\"story_text\":\"This feeling will not pass.\",\"belief_strength\":80,\"distress_level\":7}"
         }
       }
+    },
+    {
+      "name": "AI Coach & Fear Forecast",
+      "item": [
+        {
+          "name": "Chat - Start Session / Get Sessions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/chat/"
+          }
+        },
+        {
+          "name": "Chat - Start Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/chat/",
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            }
+          }
+        },
+        {
+          "name": "Chat - Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/chat/{{chat_session_id}}/message/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Hello, I am feeling anxious today.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Fear Forecast - Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/fear-forecast/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fear\": \"I am afraid I will fail my exam\",\n  \"belief_strength\": 80\n}"
+            }
+          }
+        },
+        {
+          "name": "Fear Forecast - Log Outcome",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/fear-forecast/{{forecast_id}}/log_outcome/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"outcome\": \"I passed it!\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Coach & Fear Forecast",
+      "item": [
+        {
+          "name": "Chat - Start Session / Get Sessions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/chat/"
+          }
+        },
+        {
+          "name": "Chat - Start Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/chat/",
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            }
+          }
+        },
+        {
+          "name": "Chat - Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/chat/{{chat_session_id}}/message/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Hello, I am feeling anxious today.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Fear Forecast - Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/fear-forecast/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fear\": \"I am afraid I will fail my exam\",\n  \"belief_strength\": 80\n}"
+            }
+          }
+        },
+        {
+          "name": "Fear Forecast - Log Outcome",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/coach/fear-forecast/{{forecast_id}}/log_outcome/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"outcome\": \"I passed it!\"\n}"
+            }
+          }
+        }
+      ]
     }
   ],
   "variable": [

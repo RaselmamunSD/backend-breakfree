@@ -37,11 +37,25 @@ class RegisterView(generics.CreateAPIView):
     """
     serializer_class = RegisterSerializer
     permission_classes = [permissions.AllowAny]
-    
-    def post(self, request, *args, **kwargs):
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        
+        # Generate token
+        from rest_framework_simplejwt.tokens import RefreshToken
+        refresh = RefreshToken.for_user(user)
+
+        headers = self.get_success_headers(serializer.data)
         return Response(
-            {"detail": "Direct registration disabled. Use OTP-verified signup: /api/auth/signup/send-otp/"},
-            status=status.HTTP_405_METHOD_NOT_ALLOWED
+            {
+                "user": serializer.data,
+                "access": str(refresh.access_token),
+                "refresh": str(refresh)
+            }, 
+            status=status.HTTP_201_CREATED, 
+            headers=headers
         )
 
 
