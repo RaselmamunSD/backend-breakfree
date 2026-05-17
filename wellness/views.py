@@ -89,12 +89,23 @@ class UserPreferenceViewSet(UserOwnedModelViewSet):
 
 
 class ProfileDashboardView(APIView):
-    serializer_class = UserPreferenceSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
+        from features.views import consecutive_day_streak
+        from django.utils import timezone
+        
         user = request.user
         latest_subscription = user.subscriptions.select_related("plan").first()
+        
+        moods = user.moods.all()
+        mood_dates = list(moods.values_list("entry_date", flat=True))
+        streak_days = consecutive_day_streak(mood_dates)
+        mood_average = round(sum(m.mood_score for m in moods) / moods.count(), 2) if moods.exists() else 0
+        journal_count = user.journals.count()
+        total_days = (timezone.localdate() - user.date_joined.date()).days
+        total_days = max(1, total_days)
+        
         return Response(
             {
                 "user": {
@@ -104,11 +115,11 @@ class ProfileDashboardView(APIView):
                     "full_name": user.full_name,
                     "avatar": user.avatar,
                 },
-                "stats": {
-                    "journal_entries": user.journals.count(),
-                    "habit_count": user.habits.filter(is_active=True).count(),
-                    "longest_streak": max([h.streak for h in user.habits.all()], default=0),
-                },
+                "total_days": total_days,
+                "streak_days": streak_days,
+                "mood_average": mood_average,
+                "journal_count": journal_count,
+                "completed_journeys": 0,
                 "subscription": (
                     {
                         "status": latest_subscription.status,

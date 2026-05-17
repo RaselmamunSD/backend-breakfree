@@ -756,6 +756,12 @@ class JournalView(APIView):
         data = JournalLiteSerializer(JournalEntry.objects.filter(user=request.user), many=True).data
         return Response(data)
 
+    def post(self, request):
+        ser = JournalLiteSerializer(data=request.data)
+        ser.is_valid(raise_exception=True)
+        ser.save(user=request.user)
+        return Response(ser.data, status=status.HTTP_201_CREATED)
+
 
 class BreatheToolView(APIView):
     serializer_class = BreathingSessionSerializer

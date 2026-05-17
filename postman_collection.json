@@ -394,6 +394,28 @@
       }
     },
     {
+      "name": "Notifications - Register FCM Device",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/devices/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"APA91bH_example_device_token_xyz123\",\n  \"device_type\": \"android\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Notifications - List",
       "request": {
         "method": "GET",

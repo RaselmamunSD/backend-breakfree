@@ -4,8 +4,19 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Notification
-from .serializers import NotificationSerializer
+from .models import Notification, FCMDevice
+from .serializers import NotificationSerializer, FCMDeviceSerializer
+
+
+class FCMDeviceViewSet(ModelViewSet):
+    serializer_class = FCMDeviceSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return FCMDevice.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class NotificationViewSet(ModelViewSet):
